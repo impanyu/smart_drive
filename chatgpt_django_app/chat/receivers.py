@@ -1,4 +1,4 @@
-from smart_drive.chat.tasks import task_ai_chat
+from chatgpt_django_app.chat.tasks import task_ai_chat
 
 from functools import partial
 from django.db import transaction

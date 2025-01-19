@@ -6,4 +6,4 @@ class ChatConfig(AppConfig):
     name = 'chatgpt_django_app.chat'
 
     def ready(self):
-        from smart_drive.chat import receivers
+        from chatgpt_django_app.chat import receivers
