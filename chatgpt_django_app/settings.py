@@ -38,11 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'webpack_boilerplate',
     'turbo_helper',
     'channels',
-
     'chatgpt_django_app.chat',
 ]
 
