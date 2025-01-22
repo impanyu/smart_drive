@@ -16,6 +16,7 @@ class IndexView(View):
         chat = Chat.objects.first()
         if not chat:
             chat = Chat.objects.create()
+
         return HttpResponseRedirect(reverse("chat:message-list", args=[chat.pk]))
 
     def post(self, request, *args, **kwargs):
@@ -44,21 +45,24 @@ class MessageListView(ListView):
 
 message_list_view = MessageListView.as_view()
 
-
+# this is the view that creates a new message
 class MessageCreateView(CreateView):
     model = Message
     template_name = "message_create.html"
     form_class = MessageForm
 
+    # get_success_url is the url that the user will be redirected to after creating a new message
     def get_success_url(self):
         return None
-
+    
+    # get_form_kwargs is the kwargs that are passed to the form
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs["chat_pk"] = self.kwargs.get("chat_pk")
         kwargs["role"] = Message.USER
         return kwargs
-
+    
+    # get_empty_form is the empty form that is passed to the form
     def get_empty_form(self):
         """
         Return empty form so we can reset the form
@@ -69,7 +73,8 @@ class MessageCreateView(CreateView):
         kwargs.pop("files")
         kwargs.pop("instance")
         return form_class(**kwargs)
-
+    
+    # this method is called when the form is valid
     def form_valid(self, form):
         super().form_valid(form)
 
