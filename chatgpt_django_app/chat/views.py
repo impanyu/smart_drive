@@ -10,6 +10,7 @@ from .forms import MessageForm
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
+@method_decorator(csrf_protect, name='dispatch')
 class IndexView(View):
 
     def get(self, request):
