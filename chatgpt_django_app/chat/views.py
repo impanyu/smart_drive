@@ -9,6 +9,7 @@ from .models import Chat, Message
 from .forms import MessageForm
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_protect
 
 @method_decorator(csrf_protect, name='dispatch')
 class IndexView(View):
