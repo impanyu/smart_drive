@@ -7,7 +7,8 @@ from turbo_helper import turbo_stream
 
 from .models import Chat, Message
 from .forms import MessageForm
-
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 
 class IndexView(View):
 
@@ -50,6 +51,10 @@ class MessageCreateView(CreateView):
     model = Message
     template_name = "message_create.html"
     form_class = MessageForm
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
     # get_success_url is the url that the user will be redirected to after creating a new message
     def get_success_url(self):
