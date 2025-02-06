@@ -9,11 +9,11 @@ from .models import Chat, Message
 from .forms import MessageForm
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_protect
 
-@method_decorator(csrf_protect, name='dispatch')
+
+@method_decorator(csrf_exempt, name='dispatch')
 class IndexView(View):
-
+    
     def get(self, request):
         # If no chat exists, create a new chat and redirect to the message list page.
         chat = Chat.objects.first()
