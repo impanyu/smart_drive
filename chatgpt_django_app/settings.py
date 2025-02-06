@@ -137,6 +137,7 @@ WEBPACK_LOADER = {
     'MANIFEST_FILE': str(BASE_DIR / "frontend/build/manifest.json"),
 }
 
+
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
