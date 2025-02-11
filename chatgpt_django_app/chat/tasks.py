@@ -13,7 +13,7 @@ def task_ai_chat(message_pk):
 
     try:
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4o",
             messages=messages,
             temperature=0,
             stream=True,
