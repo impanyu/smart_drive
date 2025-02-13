@@ -7,7 +7,7 @@
     <!-- Main container with sidebar and content -->
     <div class="flex h-full">
       <!-- Sidebar -->
-      <div id="sidebar" class="w-0 flex-shrink-0 bg-gray-50 transition-all duration-1000 overflow-hidden">
+      <div id="sidebar" class="w-0 flex-shrink-0 bg-gray-50 transition-all duration-2000 overflow-hidden">
         <div class="w-80 h-full flex flex-col space-y-1 min-w-0">  <!-- Added min-w-0 -->
           <form method="post" action="{% url 'chat:index' %}">
             {% csrf_token %}
