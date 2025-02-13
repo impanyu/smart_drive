@@ -27,14 +27,14 @@
         </div>
       </div>
 
-      <!-- Toggle button - now between sidebar and content -->
-      <div class="flex items-center">
-        <button id="toggleSidebar" class="p-2 bg-gray-200 hover:bg-gray-300 rounded-lg">
-          <svg id="toggleIcon" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-      </div>
+  <!-- Toggle button container with solid background -->
+  <div class="w-8 flex-shrink-0 flex items-center justify-center border-l border-r border-gray-200 bg-white shadow-sm z-10">
+    <button id="toggleSidebar" class="p-2 hover:bg-gray-100 rounded-lg">
+      <span id="toggleIcon" class="block text-gray-600 text-xl font-bold transform transition-transform duration-300">
+        ←
+      </span>
+    </button>
+  </div>
 
       <!-- Main content -->
       <div id="mainContent" class="flex-1 bg-gray-50 transition-all duration-300">
