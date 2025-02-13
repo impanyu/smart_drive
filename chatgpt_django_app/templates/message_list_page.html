@@ -27,12 +27,12 @@
         </div>
       </div>
 
-      <!-- Toggle button container with solid background -->
-      <div class="w-8 flex-shrink-0 flex items-center justify-center border-l border-r border-gray-200 bg-white shadow-sm z-10">
+      <!-- Toggle button container - fixed width -->
+      <div class="w-8 flex items-center justify-center border-l border-r border-gray-200">
         <button id="toggleSidebar" class="p-2 hover:bg-gray-100 rounded-lg">
-          <span id="toggleIcon" class="transform transition-transform duration-300">
-            ←
-          </span>
+          <svg id="toggleIcon" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
         </button>
       </div>
 
@@ -63,7 +63,7 @@
       const sidebar = document.getElementById('sidebar');
       
       // Set initial state
-      let sidebarVisible = false;
+      let sidebarVisible = true;
       
       toggleButton.addEventListener('click', function() {
         sidebarVisible = !sidebarVisible;
