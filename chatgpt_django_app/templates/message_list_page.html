@@ -27,9 +27,9 @@
         </div>
       </div>
 
-      <!-- Toggle button container - fixed width -->
-      <div class="w-8 flex items-center justify-center border-l border-r border-gray-200">
-        <button id="toggleSidebar" class="p-2 hover:bg-gray-100 rounded-lg">
+      <!-- Toggle button - now between sidebar and content -->
+      <div class="flex items-center">
+        <button id="toggleSidebar" class="p-2 bg-gray-200 hover:bg-gray-300 rounded-lg">
           <svg id="toggleIcon" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
           </svg>
@@ -63,7 +63,7 @@
       const sidebar = document.getElementById('sidebar');
       
       // Set initial state
-      let sidebarVisible = true;
+      let sidebarVisible = false;
       
       toggleButton.addEventListener('click', function() {
         sidebarVisible = !sidebarVisible;
