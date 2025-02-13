@@ -3,18 +3,19 @@
 {% load turbo_helper %}
 
 {% block content %}
-  <main class="w-full">
-    <!-- Add toggle button outside the grid -->
+  <main class="w-full h-screen relative">
+    <!-- Toggle button -->
     <button id="toggleSidebar" class="fixed top-4 left-4 z-10 p-2 bg-gray-200 hover:bg-gray-300 rounded-lg">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
     </button>
 
-    <div class="grid grid-cols-12 gap-2">
-      <!-- Modified sidebar with transition -->
-      <div id="sidebar" class="col-span-12 bg-gray-50 sm:col-span-3 hidden transition-all duration-300">
-        <div class="flex flex-col space-y-1 sm:h-screen">
+    <!-- Main container with sidebar and content -->
+    <div class="flex h-full">
+      <!-- Sidebar -->
+      <div id="sidebar" class="w-0 flex-shrink-0 bg-gray-50 transition-all duration-300 overflow-hidden">
+        <div class="w-80 h-full flex flex-col space-y-1">
           <form method="post" action="{% url 'chat:index' %}">
             {% csrf_token %}
             <button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded m-2">
@@ -33,34 +34,30 @@
         </div>
       </div>
 
-      <!-- Modified main content to expand -->
-      <div id="mainContent" class="col-span-12 bg-gray-50 sm:col-span-12 transition-all duration-300">
-        <div class="bg-gray-50 sm:h-screen">
-          <div class="flex flex-col h-full">
-            {% turbo_stream_from 'chat' view.kwargs.chat_pk %}
+      <!-- Main content -->
+      <div id="mainContent" class="flex-1 bg-gray-50 transition-all duration-300">
+        <div class="h-full flex flex-col">
+          {% turbo_stream_from 'chat' view.kwargs.chat_pk %}
 
-            <div class="overflow-y-auto flex-1" id="{% dom_id view.kwargs.chat_pk "message_list_container" %}">
-              {% include 'message_list.html' with chat_pk=view.kwargs.chat_pk %}
-            </div>
+          <div class="overflow-y-auto flex-1" id="{% dom_id view.kwargs.chat_pk "message_list_container" %}">
+            {% include 'message_list.html' with chat_pk=view.kwargs.chat_pk %}
+          </div>
 
-            <div class="p-2">
-              {% url 'chat:message-create' view.kwargs.chat_pk as src %}
-              {% turbo_frame "message_create" src=src data_turbo="true" %}
-                Loading...
-              {% endturbo_frame %}
-            </div>
+          <div class="p-2">
+            {% url 'chat:message-create' view.kwargs.chat_pk as src %}
+            {% turbo_frame "message_create" src=src data_turbo="true" %}
+              Loading...
+            {% endturbo_frame %}
           </div>
         </div>
       </div>
     </div>
   </main>
 
-  <!-- Enhanced JavaScript for toggle functionality -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const toggleButton = document.getElementById('toggleSidebar');
       const sidebar = document.getElementById('sidebar');
-      const mainContent = document.getElementById('mainContent');
       
       // Set initial state
       let sidebarVisible = false;
@@ -69,15 +66,9 @@
         sidebarVisible = !sidebarVisible;
         
         if (sidebarVisible) {
-          sidebar.classList.remove('hidden');
-          sidebar.classList.add('block');
-          mainContent.classList.remove('sm:col-span-12');
-          mainContent.classList.add('sm:col-span-9');
+          sidebar.style.width = '320px';  // Show sidebar
         } else {
-          sidebar.classList.add('hidden');
-          sidebar.classList.remove('block');
-          mainContent.classList.add('sm:col-span-12');
-          mainContent.classList.remove('sm:col-span-9');
+          sidebar.style.width = '0';  // Hide sidebar
         }
       });
     });
