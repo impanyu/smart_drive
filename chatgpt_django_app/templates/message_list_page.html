@@ -7,18 +7,18 @@
     <!-- Main container with sidebar and content -->
     <div class="flex h-full">
       <!-- Sidebar -->
-      <div id="sidebar" class="w-0 flex-shrink-0 bg-gray-50 transition-all duration-300 overflow-hidden">
-        <div class="w-80 h-full flex flex-col space-y-1 min-w-0">  <!-- Added min-w-0 -->
+      <div id="sidebar" class="w-80 flex-shrink-0 bg-gray-50 transform -translate-x-80 transition-transform duration-300">
+        <div class="h-full flex flex-col space-y-1">
           <form method="post" action="{% url 'chat:index' %}">
             {% csrf_token %}
-            <button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded m-2 whitespace-nowrap">  <!-- Added whitespace-nowrap -->
+            <button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded m-2">
               Start a new conversation
             </button>
           </form>
 
           <ul class="flex flex-col py-4 space-y-2">
             {% for chat in chats %}
-              <a class="text-white py-2 px-2 rounded mx-2 bg-blue-500 hover:bg-blue-600 whitespace-nowrap"  <!-- Added whitespace-nowrap -->
+              <a class="text-white py-2 px-2 rounded mx-2 bg-blue-500 hover:bg-blue-600"
                  href="{% url 'chat:message-list' chat.pk %}">
                 Chat: created on <time>{{ chat.created_at }}</time>
               </a>
@@ -27,14 +27,14 @@
         </div>
       </div>
 
-  <!-- Toggle button container with solid background -->
-  <div class="w-8 flex-shrink-0 flex items-center justify-center border-l border-r border-gray-200 bg-white shadow-sm z-10">
-    <button id="toggleSidebar" class="p-2 hover:bg-gray-100 rounded-lg">
-      <span id="toggleIcon" class="block text-gray-600 text-xl font-bold transform transition-transform duration-300">
-        ←
-      </span>
-    </button>
-  </div>
+      <!-- Toggle button container with solid background -->
+      <div class="w-8 flex-shrink-0 flex items-center justify-center border-l border-r border-gray-200 bg-white shadow-sm z-10">
+        <button id="toggleSidebar" class="p-2 hover:bg-gray-100 rounded-lg">
+          <span id="toggleIcon" class="block text-gray-600 text-xl font-bold transform transition-transform duration-300">
+            ←
+          </span>
+        </button>
+      </div>
 
       <!-- Main content -->
       <div id="mainContent" class="flex-1 bg-gray-50 transition-all duration-300">
@@ -69,10 +69,10 @@
         sidebarVisible = !sidebarVisible;
         
         if (sidebarVisible) {
-          sidebar.style.width = '320px';  // Show sidebar
+          sidebar.classList.remove('-translate-x-80');  // Show sidebar
           toggleIcon.style.transform = 'rotate(180deg)';  // Rotate arrow
         } else {
-          sidebar.style.width = '0';  // Hide sidebar
+          sidebar.classList.add('-translate-x-80');  // Hide sidebar
           toggleIcon.style.transform = 'rotate(0deg)';  // Reset arrow
         }
       });
