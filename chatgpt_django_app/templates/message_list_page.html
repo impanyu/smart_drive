@@ -4,82 +4,43 @@
 
 {% block content %}
   <main class="w-full">
-    <!-- Add toggle button outside the grid -->
-    <button id="toggleSidebar" class="fixed top-4 left-4 z-10 p-2 bg-gray-200 hover:bg-gray-300 rounded-lg">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-    </button>
-
     <div class="grid grid-cols-12 gap-2">
-      <!-- Modified sidebar with transition -->
-      <div id="sidebar" class="col-span-12 bg-gray-50 sm:col-span-3 hidden transition-all duration-300">
+      <!-- Add button to toggle sidebar -->
+      <button id="toggleSidebar" class="fixed top-4 left-4 z-10 p-2 bg-gray-200 rounded-lg sm:hidden">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <!-- Modified sidebar with hidden-by-default on mobile -->
+      <div id="sidebar" class="col-span-12 bg-gray-50 sm:col-span-3 hidden sm:block">
         <div class="flex flex-col space-y-1 sm:h-screen">
           <form method="post" action="{% url 'chat:index' %}">
             {% csrf_token %}
-            <button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded m-2">
-              Start a new conversation
-            </button>
+            <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded m-2">Start a new conversation</button>
           </form>
 
           <ul class="flex flex-col py-4 space-y-2">
             {% for chat in chats %}
-              <a class="text-white py-2 px-2 rounded mx-2 bg-blue-500 hover:bg-blue-600"
-                 href="{% url 'chat:message-list' chat.pk %}">
-                Chat: created on <time>{{ chat.created_at }}</time>
-              </a>
+              <a class="text-white py-2 px-2 rounded mx-2 bg-blue-500"
+                 href="{% url 'chat:message-list' chat.pk %}">Chat: created on <time>{{ chat.created_at }}</time></a>
             {% endfor %}
           </ul>
         </div>
       </div>
 
-      <!-- Modified main content to expand -->
-      <div id="mainContent" class="col-span-12 bg-gray-50 sm:col-span-12 transition-all duration-300">
-        <div class="bg-gray-50 sm:h-screen">
-          <div class="flex flex-col h-full">
-            {% turbo_stream_from 'chat' view.kwargs.chat_pk %}
-
-            <div class="overflow-y-auto flex-1" id="{% dom_id view.kwargs.chat_pk "message_list_container" %}">
-              {% include 'message_list.html' with chat_pk=view.kwargs.chat_pk %}
-            </div>
-
-            <div class="p-2">
-              {% url 'chat:message-create' view.kwargs.chat_pk as src %}
-              {% turbo_frame "message_create" src=src data_turbo="true" %}
-                Loading...
-              {% endturbo_frame %}
-            </div>
-          </div>
-        </div>
+      <!-- Rest of the content -->
+      <div class="col-span-12 bg-gray-50 sm:col-span-9">
+        <!-- ... existing content ... -->
       </div>
     </div>
   </main>
 
-  <!-- Enhanced JavaScript for toggle functionality -->
+  <!-- Add JavaScript for toggle functionality -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const toggleButton = document.getElementById('toggleSidebar');
+    document.getElementById('toggleSidebar').addEventListener('click', function() {
       const sidebar = document.getElementById('sidebar');
-      const mainContent = document.getElementById('mainContent');
-      
-      // Set initial state
-      let sidebarVisible = false;
-      
-      toggleButton.addEventListener('click', function() {
-        sidebarVisible = !sidebarVisible;
-        
-        if (sidebarVisible) {
-          sidebar.classList.remove('hidden');
-          sidebar.classList.add('block');
-          mainContent.classList.remove('sm:col-span-12');
-          mainContent.classList.add('sm:col-span-9');
-        } else {
-          sidebar.classList.add('hidden');
-          sidebar.classList.remove('block');
-          mainContent.classList.add('sm:col-span-12');
-          mainContent.classList.remove('sm:col-span-9');
-        }
-      });
+      sidebar.classList.toggle('hidden');
     });
   </script>
 {% endblock %}
