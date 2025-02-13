@@ -27,22 +27,15 @@
         </div>
       </div>
 
-     <!-- Toggle button container - fixed width -->
-     <div class="w-8 flex items-center justify-center border-l border-r border-gray-200">
-      <button id="toggleSidebar" class="p-2 hover:bg-gray-100 rounded-lg">
-        <!-- Changed SVG icon to a simpler chevron -->
-        <svg id="toggleIcon" class="w-6 h-6 transform transition-transform duration-300" 
-             xmlns="http://www.w3.org/2000/svg" 
-             viewBox="0 0 24 24" 
-             fill="none" 
-             stroke="currentColor" 
-             stroke-width="2" 
-             stroke-linecap="round" 
-             stroke-linejoin="round">
-          <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-      </button>
-    </div>
+        <!-- Toggle button container - fixed width -->
+        <div class="w-8 flex items-center justify-center border-l border-r border-gray-200 bg-gray-100">
+          <button id="toggleSidebar" class="p-2 hover:bg-gray-100 rounded-lg">
+            <!-- Test with text instead of SVG -->
+            <span id="toggleIcon" class="transform transition-transform duration-300">
+              ←
+            </span>
+          </button>
+        </div>
 
       <!-- Main content -->
       <div id="mainContent" class="flex-1 bg-gray-50 transition-all duration-300">
