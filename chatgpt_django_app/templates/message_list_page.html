@@ -71,9 +71,11 @@
         if (sidebarVisible) {
           sidebar.style.width = '320px';  // Show sidebar
           toggleIcon.style.transform = 'rotate(180deg)';  // Rotate arrow
+          sidebar.style.visibility = 'visible';
         } else {
           sidebar.style.width = '0';  // Hide sidebar
           toggleIcon.style.transform = 'rotate(0deg)';  // Reset arrow
+          sidebar.style.visibility = 'hidden';
         }
       });
     });
