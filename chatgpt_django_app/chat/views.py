@@ -9,8 +9,9 @@ from .models import Chat, Message
 from .forms import MessageForm
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
-
+@login_required(login_url="/login/")
 @method_decorator(csrf_exempt, name='dispatch')
 class IndexView(View):
     
@@ -30,7 +31,7 @@ class IndexView(View):
 
 index_view = IndexView.as_view()
 
-
+@login_required(login_url="/login/")
 class MessageListView(ListView):
     model = Message
     template_name = "message_list_page.html"
@@ -48,6 +49,7 @@ class MessageListView(ListView):
 
 message_list_view = MessageListView.as_view()
 
+@login_required(login_url="/login/")
 # this is the view that creates a new message
 class MessageCreateView(CreateView):
     model = Message

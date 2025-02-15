@@ -9,7 +9,7 @@ class MessageForm(forms.ModelForm):
         label='Content',
         widget=forms.Textarea(
             attrs={
-                'rows': 5,
+                'rows': 3,
                 'class': "rounded-lg border-gray-300 block leading-normal border px-4 text-gray-700 bg-white "
                          "focus:outline-none py-2 appearance-none w-full",
                 'data-controller': "textarea-autogrow",
