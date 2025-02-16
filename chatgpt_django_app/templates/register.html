@@ -38,6 +38,21 @@
     color: red;
     font-size: 0.9em;
   }
+
+  .submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .submit-button:hover {
+    background-color: #45a049;
+  }
 </style>
 
 <div class="centered-form">
@@ -56,7 +71,7 @@
           {% endfor %}
         </div>
       {% endfor %}
-      <button type="submit">Register</button>
+      <button type="submit" class="submit-button">Register</button>
     </form>
   </div>
 </div>
