@@ -175,11 +175,7 @@ CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SECURE = False
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://localhost',
-    'https://localhost:8000',
 
-]
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
