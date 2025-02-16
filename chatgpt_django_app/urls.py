@@ -17,8 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
-from .chat.views import RegisterView
-from .views import user_login
+from .chat.views import RegisterView,user_login
+
 
 urlpatterns = [
     path('', include("chatgpt_django_app.chat.urls")),
