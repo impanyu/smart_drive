@@ -7,7 +7,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    height: 80vh;
   }
 
   .form-container {
@@ -42,7 +42,6 @@
 
 <div class="centered-form">
   <div class="form-container">
-    <h2>Register</h2>
     <form method="post">
       {% csrf_token %}
       {% for field in form %}
