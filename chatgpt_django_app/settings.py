@@ -170,9 +170,9 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
 
-CSRF_COOKIE_SAMESITE = 'None'
+
 CSRF_COOKIE_SECURE = False
-SESSION_COOKIE_SAMESITE = 'None'
+
 SESSION_COOKIE_SECURE = False
 
 
