@@ -29,6 +29,7 @@ ALLOWED_HOSTS = ['*']
 
 LOGIN_REDIRECT_URL = 'chat:message-list'  # Redirect to message list after login
 LOGOUT_REDIRECT_URL = 'login'  # Redirect to login page after logout
+LOGIN_URL = '/login/'  # Adjust this to the correct path for your login view
 
 # Application definition
 
