@@ -18,6 +18,21 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       background-color: #f9f9f9;
     }
+
+    .submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .submit-button:hover {
+    background-color: #45a049;
+  }
   </style>
   
   <div class="centered-form">
@@ -26,7 +41,7 @@
       <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Login</button>
+        <button type="submit" class="submit-button">Login</button>
       </form>
     </div>
   </div>
