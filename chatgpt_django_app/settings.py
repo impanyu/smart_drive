@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'turbo_helper',
     'channels',
     'chatgpt_django_app.chat',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
