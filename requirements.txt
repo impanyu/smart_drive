@@ -9,3 +9,4 @@ daphne==4.0.0
 channels-redis==4.1.0
 celery==5.3.6
 watchfiles==0.21.0
+django-cors-headers
