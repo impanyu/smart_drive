@@ -18,6 +18,10 @@ from django.contrib import messages
 from .forms import UserRegisterForm
 
 
+from django.contrib.auth import authenticate, login
+from .forms import UserLoginForm
+
+
 @method_decorator(csrf_exempt, name='dispatch')
 class IndexView(LoginRequiredMixin,View):
     
@@ -109,7 +113,7 @@ message_create_view = MessageCreateView.as_view()
 
 
 
-class RegisterView(FormView):
+class RegisterView(LoginRequiredMixin,FormView):
     template_name = 'register.html'
     form_class = UserRegisterForm
     success_url = reverse_lazy('login')  # Redirect to login page after successful registration
@@ -120,3 +124,23 @@ class RegisterView(FormView):
         username = form.cleaned_data.get('username')
         messages.success(self.request, f'Account created for {username}!')
         return super().form_valid(form)
+    
+
+
+
+class UserLoginView(LoginRequiredMixin,FormView):
+    template_name = 'login.html'
+    form_class = UserLoginForm
+    success_url = reverse_lazy('chat:message-list')  # Redirect to message list after successful login
+
+    def form_valid(self, form):
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password')
+        user = authenticate(self.request, username=username, password=password)
+        if user is not None:
+            login(self.request, user)
+            messages.success(self.request, f'Welcome back, {username}!')
+            return super().form_valid(form)
+        else:
+            messages.error(self.request, 'Invalid username or password.')
+            return self.form_invalid(form)
