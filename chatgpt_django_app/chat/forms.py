@@ -6,6 +6,24 @@ from .models import Chat, Message
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
+
+class UserLoginForm(forms.Form):
+    username = forms.CharField(
+        label='Username',
+        max_length=150,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter your username'
+        })
+    )
+    password = forms.CharField(
+        label='Password',
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter your password'
+        })
+    )
+
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)
 
