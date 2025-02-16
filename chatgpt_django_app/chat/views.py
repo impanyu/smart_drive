@@ -113,7 +113,7 @@ message_create_view = MessageCreateView.as_view()
 
 
 @method_decorator(csrf_exempt, name='dispatch')
-class RegisterView(LoginRequiredMixin,FormView):
+class RegisterView(FormView):
     template_name = 'register.html'
     form_class = UserRegisterForm
     success_url = reverse_lazy('login')  # Redirect to login page after successful registration
