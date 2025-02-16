@@ -2,10 +2,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2>Login</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-  </form>
+<style>
+    .centered-form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80vh; /* Adjust as needed */
+    }
+  
+    .form-container {
+      width: 300px; /* Adjust width as needed */
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: #f9f9f9;
+    }
+  </style>
+  
+  <div class="centered-form">
+    <div class="form-container">
+      <h2>Login</h2>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
 {% endblock %}
