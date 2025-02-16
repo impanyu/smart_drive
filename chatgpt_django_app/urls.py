@@ -17,14 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
-from .chat.views import RegisterView,user_login
+from .chat.views import RegisterView,UserLoginView
 
 
 urlpatterns = [
     path('', include("chatgpt_django_app.chat.urls")),
     path('admin/', admin.site.urls),
-    path('login/', user_login, name='login'),
-    path('logout/', user_login, name='logout'),
+    path('login/', UserLoginView.as_view(), name='login'),
+    path('logout/', UserLoginView.as_view(), name='logout'),
     path('register/', RegisterView.as_view(), name='register'),
 ]
 
