@@ -112,7 +112,7 @@ message_create_view = MessageCreateView.as_view()
 
 
 
-
+@method_decorator(csrf_exempt, name='dispatch')
 class RegisterView(LoginRequiredMixin,FormView):
     template_name = 'register.html'
     form_class = UserRegisterForm
@@ -127,8 +127,8 @@ class RegisterView(LoginRequiredMixin,FormView):
     
 
 
-
-class UserLoginView(LoginRequiredMixin,FormView):
+@method_decorator(csrf_exempt, name='dispatch')
+class UserLoginView(FormView):
     template_name = 'login.html'
     form_class = UserLoginForm
     success_url = reverse_lazy('chat:message-list')  # Redirect to message list after successful login
