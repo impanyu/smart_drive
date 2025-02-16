@@ -12,6 +12,12 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
+from django.urls import reverse_lazy
+from django.views.generic.edit import FormView
+from django.contrib import messages
+from .forms import UserRegisterForm
+
+
 @method_decorator(csrf_exempt, name='dispatch')
 class IndexView(LoginRequiredMixin,View):
     
@@ -99,3 +105,18 @@ class MessageCreateView(LoginRequiredMixin,CreateView):
 
 
 message_create_view = MessageCreateView.as_view()
+
+
+
+
+class RegisterView(FormView):
+    template_name = 'register.html'
+    form_class = UserRegisterForm
+    success_url = reverse_lazy('login')  # Redirect to login page after successful registration
+
+    def form_valid(self, form):
+        # Save the new user
+        form.save()
+        username = form.cleaned_data.get('username')
+        messages.success(self.request, f'Account created for {username}!')
+        return super().form_valid(form)
