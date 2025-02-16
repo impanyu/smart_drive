@@ -36,9 +36,6 @@
   }
 
   .register-button {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
     background-color: #007BFF;
     color: white;
     padding: 8px 12px;
@@ -61,14 +58,16 @@
         {{ form.as_p }}
         <button type="submit" class="submit-button">Login</button>
       </form>
+      <a href="/register/" class="register-button">Register</a>
       {% if messages %}
       <ul class="messages">
         {% for message in messages %}
           <li class="{{ message.tags }}">{{ message }}</li>
         {% endfor %}
       </ul>
+      
     {% endif %}
-    <a href="/register/" class="register-button">Register</a>
+    
     </div>
   </div>
 {% endblock %}
