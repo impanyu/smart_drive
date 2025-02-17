@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 
 
 @method_decorator(csrf_exempt, name='dispatch')
-class IndexView(LoginRequiredMixin,View):
+class IndexView(View):
     
     def get(self, request):
         
@@ -45,7 +45,7 @@ class IndexView(LoginRequiredMixin,View):
 
 index_view = IndexView.as_view()
 
-class MessageListView(LoginRequiredMixin,ListView):
+class MessageListView(ListView):
     model = Message
     template_name = "message_list_page.html"
 
@@ -63,7 +63,8 @@ class MessageListView(LoginRequiredMixin,ListView):
 message_list_view = MessageListView.as_view()
 
 # this is the view that creates a new message
-class MessageCreateView(LoginRequiredMixin,CreateView):
+#class MessageCreateView(LoginRequiredMixin,CreateView):
+class MessageCreateView(CreateView):
     model = Message
     template_name = "message_create.html"
     form_class = MessageForm
