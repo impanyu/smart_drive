@@ -11,5 +11,5 @@ app_name = "chat"
 urlpatterns = [
     path("", index_view, name="index"),
     path("chat/<int:chat_pk>/message/list/", message_list_view, name="message-list"),
-    path("chat/<int:chat_pk>/message/create/", message_create_view, name="message-create"),
+    path("chat/<int:chat_pk>/message/create/", message_create_view, name="message-create")
 ]
