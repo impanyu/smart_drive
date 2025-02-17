@@ -29,7 +29,7 @@ logger = logging.getLogger(__name__)
 class IndexView(LoginRequiredMixin,View):
     
     def get(self, request):
-        logger.info(f"User {request.user} accessing IndexView.")
+        
         # If no chat exists, create a new chat and redirect to the message list page.
         chat = Chat.objects.first()
         if not chat:
@@ -143,6 +143,7 @@ class UserLoginView(FormView):
         user = authenticate(self.request, username=username, password=password)
         if user is not None:
             login(self.request, user)
+            logger.info(f"User {username} accessing IndexView.")
             messages.success(self.request, f'Welcome back, {username}!')
             return super().form_valid(form)
         else:
