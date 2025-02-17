@@ -20,12 +20,16 @@ from .forms import UserRegisterForm
 
 from django.contrib.auth import authenticate, login
 from .forms import UserLoginForm
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 @method_decorator(csrf_exempt, name='dispatch')
 class IndexView(LoginRequiredMixin,View):
     
     def get(self, request):
+        logger.info(f"User {request.user} accessing IndexView.")
         # If no chat exists, create a new chat and redirect to the message list page.
         chat = Chat.objects.first()
         if not chat:
