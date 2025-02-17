@@ -141,9 +141,10 @@ class UserLoginView(FormView):
         username = form.cleaned_data.get('username')
         password = form.cleaned_data.get('password')
         user = authenticate(self.request, username=username, password=password)
+        logger.info(f"User {username} accessing IndexView.")
         if user is not None:
             login(self.request, user)
-            logger.info(f"User {username} accessing IndexView.")
+            
             messages.success(self.request, f'Welcome back, {username}!')
             return super().form_valid(form)
         else:
