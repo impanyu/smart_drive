@@ -131,7 +131,7 @@ class RegisterView(FormView):
 class UserLoginView(FormView):
     template_name = 'login.html'
     form_class = UserLoginForm
-    success_url = reverse_lazy('')  # Redirect to message list after successful login
+    success_url = reverse_lazy('chat:message-list')  # Redirect to message list after successful login
 
     def form_valid(self, form):
         username = form.cleaned_data.get('username')
@@ -140,7 +140,6 @@ class UserLoginView(FormView):
         if user is not None:
             login(self.request, user)
             messages.success(self.request, f'Welcome back, {username}!')
-            
             return super().form_valid(form)
         else:
             messages.error(self.request, 'Invalid username or password.')
