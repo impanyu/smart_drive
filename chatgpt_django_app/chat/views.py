@@ -131,7 +131,7 @@ class RegisterView(FormView):
 class UserLoginView(FormView):
     template_name = 'login.html'
     form_class = UserLoginForm
-    success_url = reverse_lazy('index')  # Redirect to message list after successful login
+    success_url = reverse_lazy('chat:index')  # Redirect to message list after successful login
 
     def form_valid(self, form):
         username = form.cleaned_data.get('username')
